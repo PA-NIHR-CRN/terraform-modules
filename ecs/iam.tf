@@ -8,7 +8,7 @@ resource "aws_iam_role" "iam-ecs-task-role" {
    {
      "Action": "sts:AssumeRole",
      "Principal": {
-       "Service": "ecs-tasks.amazonaws.com"
+       "Service": ["ecs-tasks.amazonaws.com", "ecs.amazonaws.com"]
      },
      "Effect": "Allow",
      "Sid": ""
@@ -33,14 +33,31 @@ resource "aws_iam_role_policy" "task-execution-role-policy" {
         "Action" : [
           "ecr:GetAuthorizationToken",
           "ecr:BatchCheckLayerAvailability",
-          "ecr:GetDownloadUrlForLayer",
           "ecr:BatchGetImage",
+          "ecr:Get*",
+          "ecr:Describe*",
+          "ecr:List*",
+          "kms:List*",
           "logs:CreateLogStream",
           "logs:PutLogEvents",
+          "logs:DescribeLogGroups",
+          "xray:Get*",
+          "xray:PutTelemetryRecords",
+          "xray:PutTraceSegments",
           "lambda:InvokeFunction",
           "sqs:ReceiveMessage",
           "kafka:*",
-          "s3:*"
+          "s3:*",
+          "secretsmanager:DescribeSecret",
+          "secretsmanager:GetResourcePolicy",
+          "secretsmanager:GetSecretValue",
+          "kms:Decrypt",
+          "kms:DescribeKey",
+          "kms:Encrypt",
+          "kms:GenerateDataKey",
+          "kms:GenerateDataKeyPair",
+          "kms:ReEncryptFrom",
+          "kms:ReEncryptTo"
         ]
         Effect   = "Allow"
         Resource = "*"
