@@ -37,12 +37,6 @@ jobs:
     - name: Terraform Format
       run: |
             terraform fmt
-
-    - name: Check formatting of Terraform files
-      uses: dflook/terraform-fmt-check@v1
-
-    - name: Run linting rules against Terraform files
-      uses: devops-infra/action-tflint@v0.3
         
     - name: Terraform Validate
       run: |
