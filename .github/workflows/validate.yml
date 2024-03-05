@@ -3,17 +3,14 @@ name: 'Validate Terraform'
 on:
   push:
     branches:
-       - '*'
-       - '*/*'
-       - '**'
-       - '!main'  
+       - main
+       
   pull_request:
-    branches:
-       - '!main'  
+  workflow_dispatch: 
 
 jobs:
   terraform:
-    name: 'PR Raise From Any Branch to Develop'
+    name: 'Validate terraform on PR.'
     runs-on: ubuntu-latest
 
     defaults:
