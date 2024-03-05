@@ -4,13 +4,13 @@ on:
   push:
     branches:
        - main
-       
+
   pull_request:
   workflow_dispatch: 
 
 jobs:
   terraform:
-    name: 'Validate terraform on PR.'
+    name: 'Validate terraform.'
     runs-on: ubuntu-latest
 
     defaults:
