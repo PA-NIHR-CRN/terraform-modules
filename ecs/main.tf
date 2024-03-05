@@ -1,3 +1,12 @@
+terraform {
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 5.0"
+    }
+  }
+}
+
 resource "aws_security_group" "ecs_security_group" {
   name        = "${var.account}-sg-${var.env}-ecs-${var.name}"
   description = "ECS Security group"

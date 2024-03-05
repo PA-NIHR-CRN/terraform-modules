@@ -6,6 +6,10 @@ variable "env" {
   description = "Environment name"
   type        = string
 
+  validation {
+    condition     = var.env == "dev" || var.env == "test" || var.env == "uat" || var.env == "oat" || var.env == "prod"
+    error_message = "The Env value must be \"dev\" OR \"oat\" OR \"uat\" OR \"prod\"."
+  }
 }
 variable "name" {
   type = string
@@ -68,11 +72,6 @@ variable "ecs_subnets" {
   type        = list(any)
 }
 
-# ---------------------------------------------------------------------------------------------------------------------
-# OPTIONAL PARAMETERS
-# These parameters have reasonable defaults.
-# ---------------------------------------------------------------------------------------------------------------------
-
 variable "region" {
   default     = "eu-west-2"
   type        = string
@@ -89,18 +88,6 @@ variable "ecs_cpu" {
   description = "ECS CPU size"
   type        = number
   default     = 256
-}
-
-variable "autoscaling_min_capacity" {
-  description = "The minimum number of containers in the ASG"
-  type        = number
-  default     = 1
-}
-
-variable "autoscaling_max_capacity" {
-  description = "The maximum number of containers in the ASG"
-  type        = number
-  default     = 8
 }
 
 variable "ecs_service_desired_count" {
@@ -127,13 +114,6 @@ variable "autoscaling_policy_target_value" {
   default     = 10 * 60 # 10 reqs/s
 }
 
-variable "target_group_health_check_path" {
-  description = "The health check path for the target group"
-  type        = string
-  default     = "/account"
-}
-
-
 variable "task_definition_requires_compatibilities" {
   description = "List of launch types compatible with the task definition"
   type        = list(string)
@@ -146,52 +126,10 @@ variable "task_definition_network_mode" {
   default     = "awsvpc"
 }
 
-variable "target_group_health_check_matcher" {
-  description = "Matcher for the target group health check"
-  type        = string
-  default     = "200-399"
-}
-
-variable "target_group_target_type" {
-  description = "Target type for the target group"
-  type        = string
-  default     = "ip"
-}
-
-variable "listener_rule_priority" {
-  description = "Priority for the listener rule"
-  type        = number
-  default     = 100
-}
-
-variable "listener_rule_action_type" {
-  description = "Type of action for the listener rule"
-  type        = string
-  default     = "forward"
-}
-
 variable "enable_container_insights" {
   type        = bool
   default     = true
   description = "Enable Cloudwatch Container Insights"
-}
-
-variable "appautoscaling_service_namespace" {
-  description = "The namespace for the App Auto Scaling service"
-  type        = string
-  default     = "ecs"
-}
-
-variable "appautoscaling_policy_type" {
-  description = "The type of App Auto Scaling policy"
-  type        = string
-  default     = "TargetTrackingScaling"
-}
-
-variable "target_name_prefix" {
-  description = "Prefix to use for naming ALB resources. Note: This has limit of 6 characters"
-  type        = string
-  default     = "myacc"
 }
 
 variable "target_port" {
@@ -204,18 +142,6 @@ variable "target_protocol" {
   description = "Protocol for the target group."
   type        = string
   default     = "TCP"
-}
-
-variable "alb_name" {
-  description = "Name of the Application Load Balancer"
-  type        = string
-  default     = "nihrd-dev-alb"
-}
-
-variable "ecs_additional_policies" {
-  description = "list of additional arns to attach to ECS. NB ensure the permissions are also allowed in the permission boundary"
-  type        = list(string)
-  default     = []
 }
 
 variable "assign_public_ip" {
