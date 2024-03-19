@@ -9,6 +9,8 @@ on:
   workflow_dispatch: 
 
 jobs:
-  validate:
+  validate-ecs:
     uses: PA-NIHR-CRN/github-shared-workflows-and-actions/.github/workflows/validate-terraform.yml@feature/set-up-repo
     secrets: inherit
+    with:
+      path: ecs
