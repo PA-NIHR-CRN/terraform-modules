@@ -9,33 +9,39 @@ on:
   workflow_dispatch: 
 
 jobs:
-  terraform:
-    name: 'Validate terraform.'
-    runs-on: ubuntu-latest
+  # terraform:
+  #   name: 'Validate terraform.'
+  #   runs-on: ubuntu-latest
 
-    defaults:
-      run:
-        shell: bash
+  validate:
+    uses: PA-NIHR-CRN/github-shared-workflows-and-actions/.github/workflows/validate-terraform.yml@feature/set-up-repo
+    secrets: inherit
 
-    steps:
-    - name: Configure AWS Credentials
-      uses: aws-actions/configure-aws-credentials@v4
-      with:
-        aws-access-key-id: ${{ secrets.NIHR_DEVELOPMENT_IAM_ACCESS_KEY_ID }}
-        aws-secret-access-key: ${{ secrets.NIHR_DEVELOPMENT_IAM_ACCESS_KEY_SECRET }}
-        aws-region: eu-west-2
+    # defaults:
+    #   run:
+    #     shell: bash
 
-    - name: Checkout
-      uses: actions/checkout@v4
+    # steps:
+    # - name: Configure AWS Credentials
+    #   uses: aws-actions/configure-aws-credentials@v4
+    #   with:
+    #     aws-access-key-id: ${{ secrets.NIHR_DEVELOPMENT_IAM_ACCESS_KEY_ID }}
+    #     aws-secret-access-key: ${{ secrets.NIHR_DEVELOPMENT_IAM_ACCESS_KEY_SECRET }}
+    #     aws-region: eu-west-2
 
-    - name: Terraform Init
-      run: |
-           terraform init --backend=false
+    
 
-    - name: Terraform Format
-      run: |
-            terraform fmt
+    # - name: Checkout
+    #   uses: actions/checkout@v4
+
+    # - name: Terraform Init
+    #   run: |
+    #        terraform init --backend=false
+
+    # - name: Terraform Format
+    #   run: |
+    #         terraform fmt
         
-    - name: Terraform Validate
-      run: |
-           terraform validate
+    # - name: Terraform Validate
+    #   run: |
+    #        terraform validate
