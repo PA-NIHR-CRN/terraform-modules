@@ -1,0 +1,16 @@
+name: 'Validate Terraform'
+
+on:
+  push:
+    branches:
+       - main
+
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  validate-ecs:
+    uses: PA-NIHR-CRN/github-shared-workflows-and-actions/.github/workflows/validate-terraform.yml@v1.0.0
+    secrets: inherit
+    with:
+      path: ecs
