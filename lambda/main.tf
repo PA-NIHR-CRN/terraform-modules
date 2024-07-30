@@ -19,7 +19,7 @@ resource "aws_security_group" "sg_lambda" {
 }
 
 resource "aws_lambda_function" "lambda" {
-  function_name = "${var.name_prefix}-lambda-${var.env}-${var.system}"
+  function_name = var.function_name
   memory_size   = var.memory_size
   timeout       = var.timeout
   handler       = var.handler
