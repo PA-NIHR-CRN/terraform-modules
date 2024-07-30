@@ -37,13 +37,6 @@ resource "aws_lambda_function" "lambda" {
     variables = var.environment_variables
   }
 
-  dynamic "lifecycle" {
-    for_each = var.lifecycle_ignore_changes != null ? [1] : []
-    content {
-      ignore_changes = var.lifecycle_ignore_changes
-    }
-  }
-
   tags = merge(var.tags, {
     Name        = "${var.name_prefix}-lambda-${var.env}-${var.system}"
     Environment = var.env
