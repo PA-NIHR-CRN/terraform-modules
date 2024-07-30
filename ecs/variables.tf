@@ -149,3 +149,8 @@ variable "assign_public_ip" {
   default     = false
   description = "Assign public IP to ECS Service"
 }
+
+variable "ecs_role_arn" {
+  description = "ARN of the IAM role for the ECS"
+  type        = string
+}
