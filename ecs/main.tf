@@ -93,8 +93,8 @@ resource "aws_ecs_task_definition" "ecs_task_definition" {
   family                   = "${var.account}-ecs-${var.env}-${var.name}-task-definition"
   requires_compatibilities = var.task_definition_requires_compatibilities
   network_mode             = var.task_definition_network_mode
-  execution_role_arn       = aws_iam_role.iam-ecs-task-role.arn
-  task_role_arn            = aws_iam_role.iam-ecs-task-role.arn
+  execution_role_arn       = var.ecs_role_arn
+  task_role_arn            = var.ecs_role_arn
   memory                   = var.ecs_memory
   cpu                      = var.ecs_cpu
   container_definitions = jsonencode([
