@@ -72,12 +72,6 @@ variable "environment_variables" {
   default     = {}
 }
 
-variable "lifecycle_ignore_changes" {
-  description = "List of attributes to ignore changes for"
-  type        = list(string)
-  default     = null
-}
-
 variable "alias_name" {
   description = "Name for the Lambda function alias"
   type        = string
