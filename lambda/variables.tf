@@ -1,3 +1,8 @@
+variable "function_name" {
+  description = "Name of the function"
+  type        = string
+}
+
 variable "name_prefix" {
   description = "Prefix to use for resource names"
   type        = string
